@@ -1,44 +1,38 @@
-import os
+import colorama
+from colorama import Fore, Back, Style
 import time
 
-# Funzione per pulire il terminale
-def clear_terminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
+colorama.init(autoreset=True)
 
-# Funzione per generare il testo della sfera
-def generate_sphere_text():
-    sphere_text = []
-    radius = 10
-    for y in range(-radius, radius + 1):
-        line = ''
-        for x in range(-radius, radius + 1):
-            distance = (x ** 2 + y ** 2) ** 0.5
-            if distance <= radius:
-                line += 'O'
-            else:
-                line += ' '
-        sphere_text.append(line)
-    return sphere_text
+# Funzione per stampare la ciotola e gli spagetti
+def print_bowl():
+    bowl = '''
+           \\   /
+            .-.
+           |o o|
+           |   |
+           |   |
+           -----
+          '''
+    print(Fore.YELLOW + bowl)
+    print()
 
-# Funzione per stampare il testo della sfera
-def print_sphere_text(sphere_text, offset):
-    clear_terminal()
-    for line in sphere_text:
-        print(' ' * offset + line)
+# Funzione per stampare il testo "MiKeOfficialTM" con colori arcobaleno
+def print_rainbow_text(text):
+    colors = [Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA]
+    interval = 0.2  # Intervallo di tempo tra i colori (in secondi)
+    rainbow_text = ''
 
-# Funzione per eseguire il loop del movimento della sfera
-def sphere_bounce_loop():
-    sphere_text = generate_sphere_text()
-    max_offset = os.get_terminal_size().columns - len(sphere_text[0])
-    direction = 1
-    offset = 0
+    for char in text:
+        for color in colors:
+            rainbow_text += color + char
+            time.sleep(interval)
+    print(rainbow_text)
 
-    while True:
-        print_sphere_text(sphere_text, offset)
-        offset += direction
-        if offset >= max_offset or offset <= 0:
-            direction *= -1
-        time.sleep(0.05)
+# Stampa la ciotola e gli spagetti
+print_bowl()
+print()
 
-# Esegui il loop del movimento della sfera
-sphere_bounce_loop()
+# Stampa il testo "MiKeOfficialTM" con colori arcobaleno
+text = "MiKeOfficialTM"
+print_rainbow_text(text)
